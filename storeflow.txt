@@ -1,0 +1,43 @@
+Fluxos v1:
+
+Autenticação & usuários
+
+Login por email/senha
+
+Usuário com role: ADMIN ou SELLER
+
+ADMIN cria outros usuários
+
+Produtos & estoque
+
+CRUD de produtos
+
+Campos: nome, SKU, preço de venda, custo, quantidade em estoque, categoria
+
+Decrementar estoque quando cria um pedido
+
+Endpoint pra listar produtos com estoque baixo
+
+Clientes
+
+CRUD de clientes (nome, email, telefone)
+
+Pedidos (vendas)
+
+Criar pedido para um cliente
+
+Itens do pedido: produto, quantidade, preço unitário
+
+Status do pedido: PENDING, PAID, CANCELLED
+
+Ao marcar como PAID, desconta estoque
+
+Dashboard simples
+
+Endpoint que retorna:
+
+total de vendas no dia
+
+quantidade de pedidos
+
+top 5 produtos mais vendidos
