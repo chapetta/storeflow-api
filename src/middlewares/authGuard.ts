@@ -1,10 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
+import { AppError } from "../exceptions/AppError";
 
 const JWT_SECRET = process.env.JWT_SECRET as string;
 
 if (!JWT_SECRET) {
-  throw new Error("JWT_SECRET is not set");
+  throw new AppError("JWT_SECRET is not set", 500);
 }
 
 interface TokenPayload {
