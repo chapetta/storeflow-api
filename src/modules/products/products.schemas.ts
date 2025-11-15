@@ -21,10 +21,7 @@ export const createProductSchema = z.object({
 
   price: z
     .number({
-      error: (issue) =>
-        issue.input === undefined
-          ? "Preço é obrigatório"
-          : "Preço deve ser numérico",
+      error: () => "Preço deve ser numérico",
     })
     .positive({ error: "Preço deve ser maior que zero" }),
 
@@ -32,19 +29,19 @@ export const createProductSchema = z.object({
     .number({
       error: () => "Estoque deve ser numérico",
     })
-    .int({ error: "Estoque deve ser um número inteiro" })
-    .min(0, { error: "Estoque não pode ser negativo" })
-    .optional(),
+    .int({ error: "Estoque deve ser inteiro" })
+    .min(0, { error: "Estoque não pode ser negativo" }),
 });
 
 export type CreateProductInput = z.infer<typeof createProductSchema>;
 
+// 🔹 NOVO: schema de UPDATE (tudo opcional)
 export const updateProductSchema = z.object({
   name: z
     .string({
       error: (issue) =>
         issue.input === undefined
-          ? "Nome é obrigatório"
+          ? "Nome deve ser uma string"
           : "Nome deve ser uma string",
     })
     .min(2, { error: "Nome deve ter pelo menos 2 caracteres" })
@@ -54,7 +51,7 @@ export const updateProductSchema = z.object({
     .string({
       error: (issue) =>
         issue.input === undefined
-          ? "SKU é obrigatório"
+          ? "SKU deve ser uma string"
           : "SKU deve ser uma string",
     })
     .min(2, { error: "SKU deve ter pelo menos 2 caracteres" })
@@ -71,14 +68,8 @@ export const updateProductSchema = z.object({
     .number({
       error: () => "Estoque deve ser numérico",
     })
-    .int({ error: "Estoque deve ser um número inteiro" })
+    .int({ error: "Estoque deve ser inteiro" })
     .min(0, { error: "Estoque não pode ser negativo" })
-    .optional(),
-
-  active: z
-    .boolean({
-      error: () => "Active deve ser um booleano",
-    })
     .optional(),
 });
 

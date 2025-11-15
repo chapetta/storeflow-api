@@ -14,4 +14,15 @@ productsRouter.post(
 );
 productsRouter.get("/", authGuard, productsController.list);
 
+productsRouter.get("/:id", authGuard, productsController.getOne);
+
+productsRouter.put(
+  "/:id",
+  authGuard,
+  validateBody(updateProductSchema),
+  productsController.update
+);
+
+productsRouter.delete("/:id", authGuard, productsController.delete);
+
 export { productsRouter };
