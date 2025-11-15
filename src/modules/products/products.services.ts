@@ -1,6 +1,6 @@
 import { productsRepository } from "./products.repository";
 
-export const poductsService = {
+export const productsService = {
   async createProduct(name: string, sku: string, price: number, stock = 0) {
     const exists = await productsRepository.findBySku(sku);
 
