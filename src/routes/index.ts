@@ -1,9 +1,10 @@
 import { Router } from "express";
+import { usersRouter } from "../modules/users/users.routes";
+import { authRouter } from "../modules/auth/auth.routes";
 
 const router = Router();
 
-router.get("/health", (req, res) => {
-  return res.status(200).json({ status: "ok" });
-});
+router.use("/users", usersRouter);
+router.use("/auth", authRouter);
 
 export { router };
