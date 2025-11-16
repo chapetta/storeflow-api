@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16
+    container_name: storeflow-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: storeflow
+      POSTGRES_PASSWORD: storeflow
+      POSTGRES_DB: storeflow
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./.docker/postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d storeflow -U storeflow" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: storeflow-api
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://storeflow:storeflow@db:5432/storeflow?schema=public
+      JWT_SECRET: ${JWT_SECRET:-storeflow}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-1d}
+      PORT: 3001
+    ports:
+      - "3002:3001"

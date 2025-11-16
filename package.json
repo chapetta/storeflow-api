@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/server.js",
-    "dev": "npm run build && npm run start"
+    "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules src/server.ts"
   },
   "keywords": [],
   "author": "",
