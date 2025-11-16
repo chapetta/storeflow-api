@@ -35,7 +35,6 @@ export const createProductSchema = z.object({
 
 export type CreateProductInput = z.infer<typeof createProductSchema>;
 
-// 🔹 NOVO: schema de UPDATE (tudo opcional)
 export const updateProductSchema = z.object({
   name: z
     .string({
